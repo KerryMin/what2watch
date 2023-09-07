@@ -10,7 +10,7 @@ export type ListItem = {
 type SelectedItems = (ListItem | undefined)[]
 interface ICardList {
   list: ListItem[]
-  colWidth?: 6 | 12
+  colSpan?: string
   selected: SelectedItems
   onPress: (item: ListItem) => void
 }
@@ -18,14 +18,14 @@ export const CardsList = ({
   list,
   selected,
   onPress,
-  colWidth = 12
+  colSpan = 'col-span-4'
 }: ICardList) => {
   return (
-    <div className={`grid grid-cols-${colWidth} gap-4`}>
+    <div className={`grid grid-cols-12 gap-4`}>
       {list.map((item) => {
         const isSelected = !!selected.find((s) => s?.id === item.id)
         return (
-          <div key={item.id} className='col-span-12 sm:col-span-3'>
+          <div key={item.id} className={`${colSpan}`}>
             <MemoizedMainCard
               onPress={() => onPress(item)}
               selected={isSelected}

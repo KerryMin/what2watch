@@ -12,3 +12,7 @@ export const fetchCall = async (
   }
   return data
 }
+
+export function getImages(imagePath: string) {
+  return `https://image.tmdb.org/t/p/w200/${imagePath}`
+}

@@ -46,7 +46,7 @@ export function SelectMediaType() {
         selected={context.state.mediaType}
         onPress={handlePress}
         list={list}
-        colWidth={6}
+        colSpan={'col-span-6'}
       />
     </StepWrapper>
   )

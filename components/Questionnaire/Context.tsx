@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useContext, useEffect, useReducer } from 'react'
 import { initialState, reducer, State, Action } from './reducer'
 import { ListItem } from '../CardList'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 type QuestionnaireContextProps = {
   state: State // Replace any with the type of your state
@@ -24,7 +25,9 @@ type QuestionnaireProps = {
 export const QuestionnaireProvider: React.FC<QuestionnaireProps> = ({
   children
 }) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [storage, setStorage] = useLocalStorage('wat2watch', initialState)
+  const [state, dispatch] = useReducer(reducer, storage)
+
   const addMediaType = (payload: ListItem) => {
     dispatch({
       type: 'ADD_MEDIA_TYPE',
@@ -64,6 +67,9 @@ export const QuestionnaireProvider: React.FC<QuestionnaireProps> = ({
       payload
     })
   }
+  useEffect(() => {
+    setStorage(state)
+  }, [state])
   return (
     <QuestionnaireContext.Provider
       value={{

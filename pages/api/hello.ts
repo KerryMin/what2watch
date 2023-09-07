@@ -24,17 +24,19 @@ export default async function handler(
     //   time_window: 'week',
     //   media_type: 'all'
     // })
-    const { results } = await moviedb.discoverMovie({
-      language: 'en-US',
-      page,
-      region: 'US'
-    })
-    const genres = await fetchCall(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY}&language=en-US`
-    )
+    // moviedb.movieRecommendations
+    // moviedb.movieWatchProviders
+    // const { results } = await moviedb.discoverMovie({
+    //   language: 'en-US',
+    //   page,
+    //   region: 'US'
+    // })
+    // const genres = await fetchCall(
+    //   `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY}&language=en-US`
+    // )
     // https://api.themoviedb.org/3/genre/movie/list?api_key=[MY_KEY]&language=en-US
     // const genres = moviedb.genreMovieList({ id: 3, language: 'en-US' })
-    res.status(200).json({ data: { results, genres } })
+    // res.status(200).json({ data: { results } })
   } catch (e) {
     res.status(500).send({ data: e })
   }

@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import Wizard from '../Wizard'
-import { QuestionnaireProvider, useQuestionnaireContext } from './Context'
+import { useQuestionnaireContext } from './Context'
 import { AiPrompt, SelectGenre, SelectMediaType } from './steps'
 import { fetchCall } from '@/helpers/nextHelpers'
 const steps = [<SelectMediaType />, <SelectGenre />, <AiPrompt />]
@@ -16,8 +16,6 @@ function QuestionnaireContent() {
 
   async function handleFinish() {
     const data = await fetchCall('/api/hello')
-
-    console.log('log: handleFinish', data)
   }
 
   function handleNext(isFinal: boolean) {

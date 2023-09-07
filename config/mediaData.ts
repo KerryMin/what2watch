@@ -1,3 +1,5 @@
+import { MovieResult, TvResult } from 'moviedb-promise'
+
 export const releaseYear = {
   MAX: 2023,
   MIN: 1900
@@ -192,3 +194,17 @@ export const allGenres = (isMovie: boolean, isTv: boolean) =>
   [...(isMovie ? movieGenres : []), ...(isTv ? tvShowGenres : [])].filter(
     (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
   )
+export function separateGenres<T>(arr: T[]) {
+  const tvGenres: T[] = []
+  const movieGenresInternal: T[] = arr.filter((g: T) => {
+    // @ts-ignore this is fine
+    const isMovieGenre = !!movieGenres.find((m: T) => m.id === g.id)
+
+    if (!isMovieGenre) {
+      tvGenres.push(g)
+    }
+
+    return isMovieGenre
+  })
+  return { movieGenres: movieGenresInternal, tvGenres }
+}
