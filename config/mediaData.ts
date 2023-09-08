@@ -13,82 +13,82 @@ export type MediaType = {
 export const tvShowGenres = [
   {
     id: 10759,
-    image: '/images/action-movie.jpeg',
+    image: '/images/action-tvshow.jpg',
     name: 'Action & Adventure'
   },
   {
     id: 16,
-    image: '/images/action-movie.jpeg',
+    image: '/images/animated-tvshow.jpg',
     name: 'Animation'
   },
   {
     id: 35,
-    image: '/images/action-movie.jpeg',
+    image: '/images/comedy-tvshow.jpg',
     name: 'Comedy'
   },
   {
     id: 80,
-    image: '/images/action-movie.jpeg',
+    image: '/images/crime-tvshow.jpeg',
     name: 'Crime'
   },
   {
     id: 99,
-    image: '/images/action-movie.jpeg',
+    image: '/images/documentary-tvshows.jpg',
     name: 'Documentary'
   },
   {
     id: 18,
-    image: '/images/action-movie.jpeg',
+    image: '/images/drama-tvshow.jpg',
     name: 'Drama'
   },
   {
     id: 10751,
-    image: '/images/action-movie.jpeg',
+    image: '/images/family-tvshow.jpg',
     name: 'Family'
   },
   {
     id: 10762,
-    image: '/images/action-movie.jpeg',
+    image: '/images/kids-tvshow.jpg',
     name: 'Kids'
   },
   {
     id: 9648,
-    image: '/images/action-movie.jpeg',
+    image: '/images/mystery-tvshow.jpg',
     name: 'Mystery'
   },
   {
     id: 10763,
-    image: '/images/action-movie.jpeg',
+    image: '/images/news-tvshow.jpeg',
     name: 'News'
   },
   {
     id: 10764,
-    image: '/images/action-movie.jpeg',
+    image: '/images/reality-tvshow.jpg',
     name: 'Reality'
   },
   {
     id: 10765,
-    image: '/images/action-movie.jpeg',
+    image: '/images/scifi-tvshow.jpg',
     name: 'Sci-Fi & Fantasy'
   },
   {
     id: 10766,
-    image: '/images/action-movie.jpeg',
+    image: '/images/soap-tvshow.jpg',
     name: 'Soap'
   },
   {
     id: 10767,
-    image: '/images/action-movie.jpeg',
+    image: '/images/talk-tvshow.jpeg',
     name: 'Talk'
   },
   {
     id: 10768,
-    image: '/images/action-movie.jpeg',
+    image: '/images/war-tvshow.jpg',
     name: 'War & Politics'
   },
   {
     id: 37,
-    image: '/images/action-movie.jpeg',
+    image: '/images/western-tvshow.jpg',
     name: 'Western'
   }
 ]
@@ -97,97 +97,97 @@ const movieGenres = [
   {
     id: 28,
     name: 'Action',
-    image: '/images/action-movie.jpeg'
+    image: '/images/actionmovie.jpg'
   },
   {
     id: 12,
     name: 'Adventure',
-    image: '/images/action-movie.jpeg'
+    image: '/images/adventure-movie.png'
   },
   {
     id: 16,
     name: 'Animation',
-    image: '/images/action-movie.jpeg'
+    image: '/images/animated-movie.jpg'
   },
   {
     id: 35,
     name: 'Comedy',
-    image: '/images/action-movie.jpeg'
+    image: '/images/comedy-movie.jpg'
   },
   {
     id: 80,
     name: 'Crime',
-    image: '/images/action-movie.jpeg'
+    image: '/images/crime-movie.jpg'
   },
   {
     id: 99,
     name: 'Documentary',
-    image: '/images/action-movie.jpeg'
+    image: '/images/docu-movie.png'
   },
   {
     id: 18,
     name: 'Drama',
-    image: '/images/action-movie.jpeg'
+    image: '/images/drama-movie.jpg'
   },
   {
     id: 10751,
     name: 'Family',
-    image: '/images/action-movie.jpeg'
+    image: '/images/family-movie.png'
   },
   {
     id: 14,
     name: 'Fantasy',
-    image: '/images/action-movie.jpeg'
+    image: '/images/fantasy-movie.jpeg'
   },
   {
     id: 36,
     name: 'History',
-    image: '/images/action-movie.jpeg'
+    image: '/images/history-movie.jpg'
   },
   {
     id: 27,
     name: 'Horror',
-    image: '/images/action-movie.jpeg'
+    image: '/images/horror-movie.jpg'
   },
   {
     id: 10402,
     name: 'Music',
-    image: '/images/action-movie.jpeg'
+    image: '/images/musical-movie.jpg'
   },
   {
     id: 9648,
     name: 'Mystery',
-    image: '/images/action-movie.jpeg'
+    image: '/images/mystery-movie.jpeg'
   },
   {
     id: 10749,
     name: 'Romance',
-    image: '/images/action-movie.jpeg'
+    image: '/images/romance-movie.jpg'
   },
   {
     id: 878,
     name: 'Science Fiction',
-    image: '/images/action-movie.jpeg'
+    image: '/images/scifi-movie.jpg'
   },
   {
     id: 10770,
     name: 'TV Movie',
-    image: '/images/action-movie.jpeg'
+    image: '/images/tvmovie-movie.jpeg'
   },
   {
     id: 53,
     name: 'Thriller',
-    image: '/images/action-movie.jpeg'
+    image: '/images/thriller-movie.jpg'
   },
   {
     id: 10752,
     name: 'War',
-    image: '/images/action-movie.jpeg'
+    image: '/images/war-movie.jpg'
   },
   {
     id: 37,
     name: 'Western',
-    image: '/images/action-movie.jpeg'
+    image: '/images/western-movie.jpg'
   }
 ]
 export const allGenres = (isMovie: boolean, isTv: boolean) =>
