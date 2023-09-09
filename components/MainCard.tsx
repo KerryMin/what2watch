@@ -17,43 +17,26 @@ interface IMainCard {
   selected?: boolean
   onPress?: () => void
   width?: string | number
+  height?: string | number
   isTv?: boolean
-  isLoadMore?: boolean
+  isLoading?: boolean
 }
 
 export default function MainCard({
-  title = 'Genre',
+  title = '',
   subTitle = '',
   image = '',
   selected,
   onPress,
   width,
   isTv,
-  isLoadMore
+  isLoading,
+  height = '300px'
 }: IMainCard) {
   const handleClick = () => {
     onPress?.()
   }
-  if (isLoadMore) {
-    return (
-      <Card
-        style={{ width }}
-        onPress={handleClick}
-        isPressable={!!onPress}
-        isHoverable={!!onPress}
-        className={'h-[300px] flex items-center justify-center'}
-      >
-        <CardHeader className='flex-col !items-start z-10'>
-          <h4
-            style={{ width: '100%' }}
-            className='text-center text-white font-medium text-large'
-          >
-            Load more
-          </h4>
-        </CardHeader>
-      </Card>
-    )
-  }
+
   return (
     <Badge
       isInvisible={!selected}
@@ -62,13 +45,13 @@ export default function MainCard({
       content={<CheckIcon />}
       color='success'
     >
-      <Skeleton isLoaded={!!title} style={{ width: '100%' }}>
+      <Skeleton isLoaded={!isLoading} style={{ width: '100%' }}>
         <Card
           style={{ width }}
           onPress={handleClick}
           isPressable={!!onPress}
           isHoverable={!!onPress}
-          className={'h-[300px]'}
+          className={`h-[${height}]`}
         >
           <CardHeader className='absolute z-10 top-1 flex-col !items-start'>
             <h4 className='text-white font-medium text-large'>{title}</h4>

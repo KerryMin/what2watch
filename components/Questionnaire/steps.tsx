@@ -89,7 +89,7 @@ export function AiPrompt() {
     context.updateAiPrompt(str)
   }
   return (
-    <StepWrapper title='Tell our AI what you wana watch (*Optional)'>
+    <StepWrapper title='Tell our AI what you wana watch (*Optional & not yet implemented)'>
       <Textarea
         value={context.state.aiPrompt}
         onValueChange={handleChange}

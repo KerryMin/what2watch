@@ -13,23 +13,25 @@ import {
   QuestionnaireProvider,
   useQuestionnaireContext
 } from '@/components/Questionnaire/Context'
-import Home from './components/Home'
 import { Fab } from '@/components/Fab'
+
+import dynamic from 'next/dynamic'
+
+const Home = dynamic(() => import('./components/Home'), { ssr: false })
 
 function QuestionModal() {
   const context = useQuestionnaireContext()
-  const isNeedToDoQuestionnaire =
-    !context.state.mediaType.length || context.state.genre.length === 0
-  const { isOpen, onOpen, onClose } = useDisclosure({
-    defaultOpen: isNeedToDoQuestionnaire
-  })
-  const mediaNextSymbol = !!context.state.genre.length ? ' > ' : ''
-  const mediaTypes = context.state.mediaType.map((l) => l.label).join(' + ')
-  const genreTypes = context.state.genre.map((l) => l.label).join(', ')
+  const {
+    state: { mediaType, genre },
+    questionsModalDisclosure
+  } = context
+  const mediaNextSymbol = !!genre.length ? ' > ' : ''
+  const mediaTypes = mediaType.map((l) => l.label).join(' + ')
+  const genreTypes = genre.map((l) => l.label).join(', ')
   const modalTitle = `${mediaTypes + mediaNextSymbol} ${genreTypes}`
 
   const handleClose = () => {
-    onClose()
+    questionsModalDisclosure.onClose()
   }
 
   return (
@@ -38,23 +40,21 @@ function QuestionModal() {
         scrollBehavior={'inside'}
         size='4xl'
         backdrop={'blur'}
-        isOpen={isOpen}
+        isOpen={questionsModalDisclosure.isOpen}
         onClose={handleClose}
       >
         <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className='flex flex-col gap-1'>
-                {modalTitle}
-              </ModalHeader>
-              <ModalBody>
-                <Questionnaire />
-              </ModalBody>
-            </>
-          )}
+          <>
+            <ModalHeader className='flex flex-col gap-1'>
+              {modalTitle}
+            </ModalHeader>
+            <ModalBody>
+              <Questionnaire />
+            </ModalBody>
+          </>
         </ModalContent>
       </Modal>
-      <Fab onClick={onOpen} />
+      <Fab onClick={questionsModalDisclosure.onOpen} />
     </>
   )
 }

@@ -15,7 +15,7 @@ function QuestionnaireContent() {
   }, [context.state])
 
   async function handleFinish() {
-    const data = await fetchCall('/api/hello')
+    context.questionsModalDisclosure.onClose()
   }
 
   function handleNext(isFinal: boolean) {

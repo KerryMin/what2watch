@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useReducer } from 'react'
 import { initialState, reducer, State, Action } from './reducer'
 import { ListItem } from '../CardList'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { useDisclosure } from '@nextui-org/react'
 
 type QuestionnaireContextProps = {
   state: State // Replace any with the type of your state
@@ -12,6 +13,7 @@ type QuestionnaireContextProps = {
   removeGenre: (id: string) => void
   changeStep: (step: number) => void
   updateAiPrompt: (prompt: string) => void
+  questionsModalDisclosure: ReturnType<typeof useDisclosure>
 }
 
 const QuestionnaireContext = createContext<
@@ -27,7 +29,11 @@ export const QuestionnaireProvider: React.FC<QuestionnaireProps> = ({
 }) => {
   const [storage, setStorage] = useLocalStorage('wat2watch', initialState)
   const [state, dispatch] = useReducer(reducer, storage)
-
+  const isNeedToDoQuestionnaire =
+    !state.mediaType.length || state.genre.length === 0
+  const questionsModalDisclosure = useDisclosure({
+    defaultOpen: isNeedToDoQuestionnaire
+  })
   const addMediaType = (payload: ListItem) => {
     dispatch({
       type: 'ADD_MEDIA_TYPE',
@@ -80,7 +86,8 @@ export const QuestionnaireProvider: React.FC<QuestionnaireProps> = ({
         addGenre,
         removeGenre,
         changeStep,
-        updateAiPrompt
+        updateAiPrompt,
+        questionsModalDisclosure
       }}
     >
       {children}
