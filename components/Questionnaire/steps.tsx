@@ -78,6 +78,7 @@ export function SelectGenre() {
         selected={context.state.genre}
         onPress={handlePress}
         list={list}
+        colSpan='col-span-3'
       />
     </StepWrapper>
   )

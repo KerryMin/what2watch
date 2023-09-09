@@ -28,10 +28,10 @@ export default function MainCard({
   image = '',
   selected,
   onPress,
-  width,
   isTv,
   isLoading,
-  height = '300px'
+  height = '300px',
+  width = '200px'
 }: IMainCard) {
   const handleClick = () => {
     onPress?.()
@@ -46,6 +46,10 @@ export default function MainCard({
       color='success'
     >
       <Skeleton isLoaded={!isLoading} style={{ width: '100%' }}>
+        <div className='text-center'>
+          <h4 className='text-white font-medium text-large'>{title}</h4>
+          <h3 className='text-white font-medium text-large'>{subTitle}</h3>
+        </div>
         <Card
           style={{ width }}
           onPress={handleClick}
@@ -53,14 +57,11 @@ export default function MainCard({
           isHoverable={!!onPress}
           className={`h-[${height}]`}
         >
-          <CardHeader className='absolute z-10 top-1 flex-col !items-start'>
-            <h4 className='text-white font-medium text-large'>{title}</h4>
-            <h3 className='text-white font-medium text-large'>{subTitle}</h3>
-          </CardHeader>
           <Image
             removeWrapper
             alt={title}
-            className='z-0 w-full h-full object-cover'
+            style={{ width, height }}
+            className={`z-0 w-full object-cover`}
             src={image}
           />
           {isTv && (
@@ -72,6 +73,7 @@ export default function MainCard({
               TV
             </Chip>
           )}
+
         </Card>
       </Skeleton>
     </Badge>

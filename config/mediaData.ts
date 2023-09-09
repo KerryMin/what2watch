@@ -14,218 +14,183 @@ export type MediaType = {
 export const tvShowGenres = [
   {
     id: 10759,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Action & Adventure',
+    image: '/images/action-tvshow.jpg',
+    name: 'Action & Adventure'
   },
   {
     id: 16,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Animation',
+    image: '/images/animated-tvshow.jpg',
+    name: 'Animation'
   },
   {
     id: 35,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Comedy',
+    image: '/images/comedy-tvshow.jpg',
+    name: 'Comedy'
   },
   {
     id: 80,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Crime',
+    image: '/images/crime-tvshow.jpeg',
+    name: 'Crime'
   },
   {
     id: 99,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Documentary',
+    image: '/images/documentary-tvshows.jpg',
+    name: 'Documentary'
   },
   {
     id: 18,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Drama',
+    image: '/images/drama-tvshow.jpg',
+    name: 'Drama'
   },
   {
     id: 10751,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Family',
+    image: '/images/family-tvshow.jpg',
+    name: 'Family'
   },
   {
     id: 10762,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Kids',
+    image: '/images/kids-tvshow.jpg',
+    name: 'Kids'
   },
   {
     id: 9648,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Mystery',
+    image: '/images/mystery-tvshow.jpg',
+    name: 'Mystery'
   },
   {
     id: 10763,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'News',
+    image: '/images/news-tvshow.jpeg',
+    name: 'News'
   },
   {
     id: 10764,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Reality',
+    image: '/images/reality-tvshow.jpg',
+    name: 'Reality'
   },
   {
     id: 10765,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Sci-Fi & Fantasy',
+    image: '/images/scifi-tvshow.jpg',
+    name: 'Sci-Fi & Fantasy'
   },
   {
     id: 10766,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Soap',
+    image: '/images/soap-tvshow.jpg',
+    name: 'Soap'
   },
   {
     id: 10767,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Talk',
+    image: '/images/talk-tvshow.jpeg',
+    name: 'Talk'
   },
   {
     id: 10768,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'War & Politics',
+    image: '/images/war-tvshow.jpg',
+    name: 'War & Politics'
   },
   {
     id: 37,
-    image: '/images/action-movie.jpeg',
-    type: 'tv',
-    name: 'Western',
-  },
-];
+    image: '/images/western-tvshow.jpg',
+    name: 'Western'
+  }
+]
 
 const movieGenres = [
   {
     id: 28,
     name: 'Action',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/actionmovie.jpg'
   },
   {
     id: 12,
     name: 'Adventure',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/adventure-movie.png'
   },
   {
     id: 16,
     name: 'Animation',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/animated-movie.jpg'
   },
   {
     id: 35,
     name: 'Comedy',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/comedy-movie.jpg'
   },
   {
     id: 80,
     name: 'Crime',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/crime-movie.jpg'
   },
   {
     id: 99,
     name: 'Documentary',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/docu-movie.png'
   },
   {
     id: 18,
     name: 'Drama',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/drama-movie.jpg'
   },
   {
     id: 10751,
     name: 'Family',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/family-movie.png'
   },
   {
     id: 14,
     name: 'Fantasy',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/fantasy-movie.jpeg'
   },
   {
     id: 36,
     name: 'History',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/history-movie.jpg'
   },
   {
     id: 27,
     name: 'Horror',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/horror-movie.jpg'
   },
   {
     id: 10402,
     name: 'Music',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/musical-movie.jpg'
   },
   {
     id: 9648,
     name: 'Mystery',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/mystery-movie.jpeg'
   },
   {
     id: 10749,
     name: 'Romance',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/romance-movie.jpg'
   },
   {
     id: 878,
     name: 'Science Fiction',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/scifi-movie.jpg'
   },
   {
     id: 10770,
     name: 'TV Movie',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/tvmovie-movie.jpeg'
   },
   {
     id: 53,
     name: 'Thriller',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/thriller-movie.jpg'
   },
   {
     id: 10752,
     name: 'War',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
+    image: '/images/war-movie.jpg'
   },
   {
     id: 37,
     name: 'Western',
-    type: 'movie',
-    image: '/images/action-movie.jpeg',
-  },
-];
+    image: '/images/western-movie.jpg'
+  }
+]
 export const allGenres = (isMovie: boolean, isTv: boolean) =>
   [...(isMovie ? movieGenres : []), ...(isTv ? tvShowGenres : [])].filter(
     (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
@@ -240,7 +205,9 @@ export type GenreItem = {
 export function separateGenres(arr: GenreItem[]) {
   const tvGenres: GenreItem[] = [];
   const movieGenresInternal: GenreItem[] = arr.filter((g: GenreItem) => {
+    // @ts-ignore TODO: fix this
     const isMovieGenre = !!movieGenres.find((m: GenreItem) => m.id === g.id);
+    // @ts-ignore TODO: fix this
     const isTvGenre = !!tvShowGenres.find((m: GenreItem) => m.id === g.id);
     if (isTvGenre) {
       tvGenres.push(g);

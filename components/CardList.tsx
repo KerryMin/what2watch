@@ -31,6 +31,8 @@ export const CardsList = ({
               selected={isSelected}
               title={item.label}
               image={item.image}
+              width={200}
+              height={300}
             />
           </div>
         )
