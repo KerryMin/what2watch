@@ -4,6 +4,8 @@ import { getImages } from '@/helpers/mediaHelpers'
 
 const moviedb = new MovieDb(process.env.TMDB_KEY || '')
 
+
+
 export type DetailsNextApiResponse = {
     details?: ShowResponse | MovieResponse;
     watchProviders?: WatchProviderListResponse;
@@ -81,3 +83,4 @@ async function getMediaSuggestions(mediaDetails: MovieResponse | ShowResponse, k
     console.error('Error fetching media suggestions:', error);
   }
 }
+

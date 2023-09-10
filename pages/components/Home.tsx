@@ -76,6 +76,7 @@ export default function Home() {
     const media = await getMovies({
       mediaTypes: context.state.mediaType.map((l) => l.id),
       genres: context.state.genre,
+      userInput: context.state.aiPrompt
     })
 
     if (media?.results) {

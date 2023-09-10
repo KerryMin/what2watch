@@ -3,11 +3,6 @@ import { allGenres } from "@/config/mediaData"
 import { Media } from "@/types"
 import { MovieResponse, ShowResponse } from "moviedb-promise"
 
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
 
 
 export function getMediaTitle(media: Media | ShowResponse | MovieResponse) {
@@ -59,21 +54,3 @@ export function getFeasibleDate(releaseYear: number) {
   // If neither condition is met, then return a default of 5 (based on your original criteria)
   return 5; 
 }
-export const extractKeywordsUsingOpenAI = async (text:string) => {
-  try {
-      const response = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
-          messages: [
-              {"role": "system", "content": "You are a helpful assistant that extracts main keywords from given text."},
-              {"role": "user", "content": `Extract the main keywords from the following text: "${text}"`}
-          ],
-      });
-
-      const assistantMessage = response.choices[0].message.content;
-      // Assuming the response from the assistant will be a comma-separated list of keywords
-      return assistantMessage?.trim().split(", ");
-  } catch (error) {
-      console.error("Error extracting keywords:", error);
-      return [];
-  }
-};

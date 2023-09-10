@@ -4,7 +4,11 @@ import { DiscoverMovieResponse, DiscoverTvResponse, MovieDb, MovieResult, TvResu
 import { getImages } from '@/helpers/mediaHelpers'
 import { combineAndOrder } from '@/helpers/arrayHelpers'
 import { GenreItem, separateGenres } from '@/config/mediaData'
+import OpenAI from "openai";
 
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 // TODO: put in vercel env var
 const moviedb = new MovieDb(process.env.TMDB_KEY || '')
 
@@ -24,23 +28,23 @@ export interface MediaNextApiRequest extends NextApiRequest {
     genres: GenreItem[];
     mediaTypes: string[];
     page?: number;
-    user_input?:string
+    userInput?:string
   }
 }
 export default async function handler(
   req: MediaNextApiRequest,
   res: NextApiResponse<MediaResponse> 
 ) {
-  const { genres = [], mediaTypes, user_input, ...rest } = req.body
+  const { genres = [], mediaTypes, userInput, ...rest } = req.body
   const aiResponse: any = {}
-  // if(!!user_input) {
-  //   // If no ID is provided but a user input is, try to find the movie using OpenAI extracted keywords.
-  //   const keywordsFromInput = await extractKeywordsUsingOpenAI(user_input);
-  //   console.log('keywordsFromInput', {keywordsFromInput, user_input})
-  //   const movieSuggestions = await searchMoviesByKeywords(keywordsFromInput?.[0] || '');
-  //   console.log('movieSuggestions', {movieSuggestions})
-  //   aiResponse.ai = movieSuggestions
-  // }
+  if(!!userInput) {
+    // If no ID is provided but a user input is, try to find the movie using OpenAI extracted keywords.
+    const keywordsFromInput = await extractKeywordsUsingOpenAI(userInput);
+    console.log('keywordsFromInput', {keywords: keywordsFromInput.keywords})
+    const movieSuggestions = await searchMoviesByKeywords(keywordsFromInput.keywords);
+    console.log('movieSuggestions', {movieSuggestions})
+    aiResponse.ai = movieSuggestions
+  }
 
   const isIncludeTv = mediaTypes?.includes('tv')
   const isIncludeMovie = mediaTypes?.includes('movie')
@@ -112,3 +116,23 @@ async function searchMoviesByKeywords(keyword: string) {
   });
   return response;
 }
+async function extractKeywordsUsingOpenAI(text: string) {
+  try {
+      const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          messages: [
+              {"role": "system", "content": "You are a helpful assistant focused on movies and TV shows. Extract relevant keywords that can be used to filter movies or tv shows and provide a title."},
+              {"role": "user", "content": `From this text: "${text}", provide a response in JSON valid format (besure not to include white space in the keywords string): { "keywords": "keyword1,keyword2,keyword3", "title": "Some title"}`}
+          ],
+      });
+
+      const assistantMessage = response.choices[0].message.content;
+      // Assuming the assistant message will be a stringified JSON
+      const jsonResponse = JSON.parse(assistantMessage || "");
+
+      return jsonResponse;
+  } catch (error) {
+      console.error("Error extracting keywords:", error);
+      return { keywords: "", title: "Error" };
+  }
+};
