@@ -71,6 +71,7 @@ export default function Home() {
   }
 
   async function handleDataInitialization() {
+    console.log("log: handleDataInitialization", context.state.aiPrompt)
     // TODO: add tv shows support
     const media = await getMovies({
       mediaTypes: context.state.mediaType.map((l) => l.id),
@@ -180,15 +181,12 @@ export default function Home() {
         style={{ height: '100%', overflow: 'scroll' }}
       >
         <ModalContent>
-          <ModalHeader className='flex flex-col gap-1'>{getMediaTitle(selectedMedia)}</ModalHeader>
+          <ModalHeader className='flex flex-col gap-1'></ModalHeader>
           <ModalBody>
             <MediaDescription media={selectedMedia} />
             <ModalFooter>
               <Button color='danger' variant='light' onPress={handleModalClose}>
                 Close
-              </Button>
-              <Button color='primary' onPress={handleModalClose}>
-                Action
               </Button>
             </ModalFooter>
           </ModalBody>

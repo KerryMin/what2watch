@@ -49,8 +49,12 @@ export function MediaDescription({ media }: { media: Media }) {
     return (
         <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
             <div className="md:w-1/3 mb-4 md:mb-0 flex-shrink-0 flex flex-col items-center">
-                <Skeleton isLoaded={!loading} className="w-full h-auto mb-4">
-                    <img src={currentMedia?.poster_path} alt={`details-${currentMedia?.media_type}`} className="rounded-lg shadow-lg" />
+                <Skeleton isLoaded={!loading} className="flex w-full h-auto justify-center items-center mb-4">
+                    <img
+                        src={currentMedia?.poster_path}
+                        alt={`details-${currentMedia?.media_type}`}
+                        className="max-h-[450px] rounded-lg shadow-lg"
+                    />
                 </Skeleton>
                 <div className="flex space-x-2 mt-4">
                     <button
@@ -90,7 +94,7 @@ export function MediaDescription({ media }: { media: Media }) {
                 </div>
             </div>
 
-            <div className="md:w-2/3 md:pl-4">
+            <div className="md:w-2/3 md:pl-4 pr-2">
                 <div className="space-y-2">
                     <Skeleton isLoaded={!loading} className="h-auto">
                         <h2 className="text-2xl font-semibold text-gray-200 break-words">{title}</h2>
@@ -122,8 +126,8 @@ export function MediaDescription({ media }: { media: Media }) {
                         <MainCard
                             key={`${currentMedia?.id}-${i}`}
                             onPress={() => handleCardPress(media)}
-                            width={150}
-                            height={150}
+                            width={200}
+                            height={300}
                             image={media?.poster_path}
                         />
                     ))}

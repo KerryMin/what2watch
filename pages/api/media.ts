@@ -6,8 +6,7 @@ import { combineAndOrder } from '@/helpers/arrayHelpers'
 import { GenreItem, separateGenres } from '@/config/mediaData'
 
 // TODO: put in vercel env var
-const KEY = '70640e1be8041b3c9b85529a5c2330b2'
-const moviedb = new MovieDb(KEY)
+const moviedb = new MovieDb(process.env.TMDB_KEY || '')
 
 export type MediaResponse =  {
   page: number;
@@ -25,13 +24,24 @@ export interface MediaNextApiRequest extends NextApiRequest {
     genres: GenreItem[];
     mediaTypes: string[];
     page?: number;
+    user_input?:string
   }
 }
 export default async function handler(
   req: MediaNextApiRequest,
   res: NextApiResponse<MediaResponse> 
 ) {
-  const { genres = [], mediaTypes, ...rest } = req.body
+  const { genres = [], mediaTypes, user_input, ...rest } = req.body
+  const aiResponse: any = {}
+  // if(!!user_input) {
+  //   // If no ID is provided but a user input is, try to find the movie using OpenAI extracted keywords.
+  //   const keywordsFromInput = await extractKeywordsUsingOpenAI(user_input);
+  //   console.log('keywordsFromInput', {keywordsFromInput, user_input})
+  //   const movieSuggestions = await searchMoviesByKeywords(keywordsFromInput?.[0] || '');
+  //   console.log('movieSuggestions', {movieSuggestions})
+  //   aiResponse.ai = movieSuggestions
+  // }
+
   const isIncludeTv = mediaTypes?.includes('tv')
   const isIncludeMovie = mediaTypes?.includes('movie')
   try {
@@ -80,6 +90,7 @@ export default async function handler(
     total_results,
     results: resultsWithImages ,
     errors,
+    aiResponse
   }
    res.status(200).json(response)
   } catch (e) {
@@ -93,4 +104,11 @@ export default async function handler(
     console.log(e)
     res.status(500).send(response)
   }
+}
+
+async function searchMoviesByKeywords(keyword: string) {
+  const response = await moviedb.searchMovie({
+    query: keyword
+  });
+  return response;
 }
