@@ -3,6 +3,8 @@ import { allGenres } from "@/config/mediaData"
 import { Media } from "@/types"
 import { MovieResponse, ShowResponse } from "moviedb-promise"
 
+
+
 export function getMediaTitle(media: Media | ShowResponse | MovieResponse) {
     let title = ``
     if (media && 'title' in media) {
@@ -33,4 +35,22 @@ export function getMediaTitle(media: Media | ShowResponse | MovieResponse) {
 
 export function getImages(imagePath: string) {
   return `https://image.tmdb.org/t/p/w400/${imagePath}`
+}
+
+export function getFeasibleDate(releaseYear: number) {
+  const currentYear = new Date().getFullYear();
+
+  let upperDifference = releaseYear + 5 - currentYear;
+  let lowerDifference = releaseYear - 1900;
+
+  if (releaseYear + 5 > currentYear) {
+      return currentYear - releaseYear; // amount of years between the current and release year
+  }
+  
+  if (releaseYear - 5 < 1900) {
+      return releaseYear - 1900; // amount of years between the release and 1900
+  }
+  
+  // If neither condition is met, then return a default of 5 (based on your original criteria)
+  return 5; 
 }

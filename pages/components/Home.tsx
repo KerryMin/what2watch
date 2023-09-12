@@ -23,6 +23,7 @@ import { ListItem } from '@/components/CardList'
 import { Media } from '@/types'
 import { MediaDescription } from '@/components/MediaDescription'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import { getImages } from '@/helpers/mediaHelpers'
 
 const PAGINATED_COUNT = 20
 export default function Home() {
@@ -30,13 +31,15 @@ export default function Home() {
   const paginatedCount = context.state.mediaType.length === 2 ? 2 * PAGINATED_COUNT : PAGINATED_COUNT
 
   const [filteredMovies, setFilteredMovies] = useState<(MovieResult | TvResult | undefined)[]>([])
+  const [aiSuggestions, setAiSuggestions] = useState<MediaResponse['aiMediaSuggestions']>()
   const [selectedMedia, setSelectedMedia] = useState<Media>()
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState(0);
 
   const trendingMovies = useFetchApi<MediaResponse>('/api/trending', { variables: { media_type: 'movie' } })
   const trendingTvShows = useFetchApi<MediaResponse>('/api/trending', { variables: { media_type: 'tv' } })
-  const [getMovies, getMovieReq] = useFetchApiLazy<MediaResponse>('/api/media')
+  const [getMedia, getMediaReq] = useFetchApiLazy<MediaResponse>('/api/media')
+  const [getAiSuggestion, getAiSuggestionReq] = useFetchApiLazy<MediaResponse>('/api/media')
   const mediaModal = useDisclosure()
   const { width } = useWindowSize()
 
@@ -49,10 +52,10 @@ export default function Home() {
   )
 
   async function goToPage(page: number) {
-    const movies = await getMovies({
+    const movies = await getMedia({
       mediaTypes: context.state.mediaType.map((l) => l.id),
       genres: context.state.genre,
-      page
+      page,
     })
     setCurrentPage(page)
     if (movies?.results) {
@@ -69,18 +72,19 @@ export default function Home() {
     setSelectedMedia(undefined)
     mediaModal.onClose()
   }
-
   async function handleDataInitialization() {
     // TODO: add tv shows support
-    const media = await getMovies({
+    const media = await getMedia({
       mediaTypes: context.state.mediaType.map((l) => l.id),
       genres: context.state.genre,
+      userInput: context.state.aiPrompt
     })
-
+    console.log("log: handleDataInitialization", media)
     if (media?.results) {
       // TODO: total_pages issue
       setTotal(media?.total_pages || 0)
       setFilteredMovies(media?.results)
+      setAiSuggestions(media?.aiMediaSuggestions)
     }
   }
 
@@ -121,6 +125,37 @@ export default function Home() {
             )
           })}
         </RowContainer>
+        {!!aiSuggestions?.title && <RowContainer
+          isScrollable
+          title={<>
+            <>
+              <Accordion>
+                <AccordionItem
+                  key='1'
+                  aria-label='ai-suggested-media'
+                  subtitle='Press to see prompt'
+                  title={aiSuggestions.title}
+                >
+                  {context.state.aiPrompt}
+                </AccordionItem>
+              </Accordion>
+
+            </>
+          </>}
+        >
+          {createEmptyArray(20).map((_, i) => {
+            const media = aiSuggestions.query.results?.[i]
+            return (
+              <MainCard
+                key={`aiSuggestions-${media?.id || i}`}
+                onPress={() => handleCardPress(media)}
+                width={200}
+                // TODO: decide if this should be on server or not
+                image={getImages(media?.poster_path || '')}
+              />
+            )
+          })}
+        </RowContainer>}
         <RowContainer
           title={
             <>
@@ -150,7 +185,7 @@ export default function Home() {
             const key = `filtered-${title + media?.id || ''}`
             return (
               <MainCard
-                isLoading={getMovieReq.loading}
+                isLoading={getMediaReq.loading}
                 key={key}
                 isTv={media && 'name' in media}
                 onPress={() => handleCardPress(media)}
@@ -180,15 +215,12 @@ export default function Home() {
         style={{ height: '100%', overflow: 'scroll' }}
       >
         <ModalContent>
-          <ModalHeader className='flex flex-col gap-1'>{getMediaTitle(selectedMedia)}</ModalHeader>
+          <ModalHeader className='flex flex-col gap-1'></ModalHeader>
           <ModalBody>
             <MediaDescription media={selectedMedia} />
             <ModalFooter>
               <Button color='danger' variant='light' onPress={handleModalClose}>
                 Close
-              </Button>
-              <Button color='primary' onPress={handleModalClose}>
-                Action
               </Button>
             </ModalFooter>
           </ModalBody>
