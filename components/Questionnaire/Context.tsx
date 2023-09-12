@@ -13,6 +13,7 @@ type QuestionnaireContextProps = {
   removeGenre: (id: string) => void
   changeStep: (step: number) => void
   updateAiPrompt: (prompt: string) => void
+  updateOpenAiKey: (openAiKey: string) => void
   questionsModalDisclosure: ReturnType<typeof useDisclosure>
 }
 
@@ -73,6 +74,12 @@ export const QuestionnaireProvider: React.FC<QuestionnaireProps> = ({
       payload
     })
   }
+  const updateOpenAiKey = (payload: string) => {
+    dispatch({
+      type: 'CHANGE_OPEN_AI_KEY',
+      payload
+    })
+  }
   useEffect(() => {
     setStorage(state)
   }, [state])
@@ -87,6 +94,7 @@ export const QuestionnaireProvider: React.FC<QuestionnaireProps> = ({
         removeGenre,
         changeStep,
         updateAiPrompt,
+        updateOpenAiKey,
         questionsModalDisclosure
       }}
     >

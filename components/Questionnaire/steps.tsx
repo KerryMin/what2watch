@@ -6,14 +6,17 @@ import { Input, Textarea } from '@nextui-org/react'
 
 const StepWrapper = ({
   title,
-  children
+  children,
+  subTitle
 }: {
   title: string
+  subTitle?: string
   children: ReactNode
 }) => {
   return (
     <div className='flex flex-col justify-center items-center'>
-      <h3 className='text-2xl font-semibold leading-tight mb-4'>{title}</h3>
+      <h3 className='text-2xl font-semibold leading-tight mb-2'>{title}</h3>
+      <h4 className='font-semibold mb-4'>{subTitle}</h4>
       {children}
     </div>
   )
@@ -86,14 +89,28 @@ export function SelectGenre() {
 
 export function AiPrompt() {
   const context = useQuestionnaireContext()
-  function handleChange(str: string) {
+  function handleAiPromptChange(str: string) {
     context.updateAiPrompt(str)
   }
+  function handleOpenAiKeyChange(str: string) {
+    context.updateOpenAiKey(str)
+  }
   return (
-    <StepWrapper title='Tell our AI what you wana watch (*Optional & not yet implemented)'>
+    <StepWrapper
+      title='Get AI generated movie suggestions!'
+      subTitle='We use GPT-3 to generate movie suggestions based on your prompt. You can get a free key here: https://openai.com/'
+    >
+      <Input
+        label='Open AI Key'
+        className='mb-4'
+        value={context.state.openAiKey}
+        onValueChange={handleOpenAiKeyChange}
+        placeholder="**-************************************************"
+      />
       <Textarea
+        label='Prompt'
         value={context.state.aiPrompt}
-        onValueChange={handleChange}
+        onValueChange={handleAiPromptChange}
         placeholder="'I'm in the mood for a sad movie that has a happy ending'"
       />
     </StepWrapper>
