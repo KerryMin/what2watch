@@ -1,6 +1,6 @@
 # What 2 Watch
 
-A project i made to help me combat my indecisiveness when it comes to selecting movies.
+A project I made to help me combat my indecisiveness when it comes to selecting movies.
 
 ## Technologies Used
 
@@ -15,25 +15,18 @@ A project i made to help me combat my indecisiveness when it comes to selecting 
 ## Features
 
 ### Filter wizard
-<p>
-  <img src="./public/images/step1.png" width="631" alt="Wizard">
-</p>
-<br>
-<p>
-  <img src="./public/images/step3.png" width="631" alt="Wizard">
-</p>
+![choose media type](./public/images/step1.png)
+![ai prompt](./public/images/step3.png)
 
-### Up to date trending movies & tv shows
-<p>
-  <img src="./public/images/trending.png" width="631" alt="Wizard">
-</p>
+### Up-to-date trending movies & tv shows
+This list is updated daily, so you should always see the most current trending movies and shows!
+![trending](./public/images/trending.png)
 
 ### AI generated movie suggestions
-<p>
-  <img src="./public/images/ai.png" width="631" alt="Wizard">
-</p>
+Categories aint enough to capture what you want to watch? Use our good old friend AI to help you with that! It also generates a unique title based on your ask!
+![ai](./public/images/ai.png)
 
 ### Meta data on media and where to watch!
-<p>
-  <img src="./public/images/where2watch.png" width="631" alt="Wizard">
-</p>
+A description, genres, runtime, similar results and where to watch? What more could you ask for?
+![where2watch.png](./public/images/where2watch.png)
+
