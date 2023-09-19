@@ -1,6 +1,6 @@
-# Next.js & NextUI Template
+# What 2 Watch
 
-This is a template for creating applications using Next.js 13 (pages directory) and NextUI (v2).
+A project i made to help me combat my indecisiveness when it comes to selecting movies.
 
 ## Technologies Used
 
@@ -12,13 +12,21 @@ This is a template for creating applications using Next.js 13 (pages directory) 
 - [Framer Motion](https://www.framer.com/motion)
 - [next-themes](https://github.com/pacocoursey/next-themes)
 
-## How to Use
+## Features
 
-To create a new project based on this template using `create-next-app`, run the following command:
+### Filter wizard
 
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-pages-template
-```
-## License
+- [step1](./public/images/step1.png)
+- [step3](./public/images/step3.png)
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-pages-template/blob/main/LICENSE).
+### Up to date trending movies & tv shows
+
+- [trending](./public/images/trending.png)
+
+### AI generated movie suggestions
+
+- [ai](./public/images/ai.png)
+
+### Meta data on media and where to watch!
+
+- [where2watch](./public/images/where2watch.png)
