@@ -15,18 +15,25 @@ A project i made to help me combat my indecisiveness when it comes to selecting 
 ## Features
 
 ### Filter wizard
-
-- [step1](./public/images/step1.png)
-- [step3](./public/images/step3.png)
+<p>
+  <img src="./public/images/step1.png" width="631" alt="Wizard">
+</p>
+<br>
+<p>
+  <img src="./public/images/step3.png" width="631" alt="Wizard">
+</p>
 
 ### Up to date trending movies & tv shows
-
-- [trending](./public/images/trending.png)
+<p>
+  <img src="./public/images/trending.png" width="631" alt="Wizard">
+</p>
 
 ### AI generated movie suggestions
-
-- [ai](./public/images/ai.png)
+<p>
+  <img src="./public/images/ai.png" width="631" alt="Wizard">
+</p>
 
 ### Meta data on media and where to watch!
-
-- [where2watch](./public/images/where2watch.png)
+<p>
+  <img src="./public/images/where2watch.png" width="631" alt="Wizard">
+</p>
