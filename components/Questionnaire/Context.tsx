@@ -15,6 +15,8 @@ type QuestionnaireContextProps = {
   updateAiPrompt: (prompt: string) => void
   updateOpenAiKey: (openAiKey: string) => void
   questionsModalDisclosure: ReturnType<typeof useDisclosure>
+  searchModalDisclosure: ReturnType<typeof useDisclosure>
+
 }
 
 const QuestionnaireContext = createContext<
@@ -35,6 +37,8 @@ export const QuestionnaireProvider: React.FC<QuestionnaireProps> = ({
   const questionsModalDisclosure = useDisclosure({
     defaultOpen: isNeedToDoQuestionnaire
   })
+  const searchModalDisclosure = useDisclosure()
+
   const addMediaType = (payload: ListItem) => {
     dispatch({
       type: 'ADD_MEDIA_TYPE',
@@ -95,7 +99,8 @@ export const QuestionnaireProvider: React.FC<QuestionnaireProps> = ({
         changeStep,
         updateAiPrompt,
         updateOpenAiKey,
-        questionsModalDisclosure
+        questionsModalDisclosure,
+        searchModalDisclosure
       }}
     >
       {children}

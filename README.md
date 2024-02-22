@@ -16,8 +16,8 @@ A project i made to help me combat my indecisiveness when it comes to selecting 
 
 ### Filter wizard
 
-- [step1](./public/images/step1.png)
-- [step3](./public/images/step3.png)
+- [step1](https://github.com/KerryMin/what2watch/blob/main/public/images/step1.png)
+- [step3](https://github.com/KerryMin/what2watch/blob/main/public/images/step3.png)
 
 ### Up to date trending movies & tv shows
 

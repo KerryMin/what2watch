@@ -13,7 +13,7 @@ const ID_TYPE = "tmdb";
 export default function JustWatchWidget(props: JustWatchWidgetProps) {
     const { objectType, id, title } = props;
     const scriptRef = useRef<HTMLScriptElement | null>(null);
-    console.log({ objectType, id, title })
+
     useEffect(() => {
         // Check if the script is already present
         if (!scriptRef.current) {

@@ -33,7 +33,7 @@ export function SelectMediaType() {
     {
       id: 'tv',
       label: 'Tv Show',
-      image: '/images/action-movie.jpeg'
+      image: '/images/comedy-tvshow.jpg'
     }
   ]
   function handlePress(item: ListItem) {

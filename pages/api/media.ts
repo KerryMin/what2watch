@@ -33,7 +33,7 @@ export interface MediaNextApiRequest extends NextApiRequest {
   body: {
     genres: GenreItem[];
     mediaTypes: string[];
-    page?: number;
+    page?: number | string | null;
     userInput?: string;
     openAiKey?: string;
   };
@@ -50,7 +50,8 @@ export default async function handler(
 
   const isIncludeTv = mediaTypes?.includes('tv');
   const isIncludeMovie = mediaTypes?.includes('movie');
-  const isIncludeAiSuggestion = !!userInput && !!(openAiKey || process.env.OPENAI_API_KEY);
+  const isIncludeAiSuggestion = false;
+  // const isIncludeAiSuggestion = !!userInput && !!(openAiKey || process.env.OPENAI_API_KEY);
   const errors: {
     moviesResult: unknown;
     tvResults: unknown;
@@ -65,7 +66,7 @@ export default async function handler(
     if (isIncludeAiSuggestion) {
       try {
         // If no ID is provided but a user input is, try to find the movie using OpenAI extracted keywords.
-        const keywordsFromInput = await extractKeywordsUsingOpenAI(userInput, openAiKey);
+        const keywordsFromInput = await extractKeywordsUsingOpenAI(userInput || '', openAiKey);
         aiMediaSuggestions.query = await getMediaByKeywords(keywordsFromInput.keywords.split(','));
         aiMediaSuggestions.title = keywordsFromInput.title;
       } catch (e) {
@@ -83,7 +84,7 @@ export default async function handler(
     if (isIncludeMovie) {
       try {
         const data = await moviedb.discoverMovie({
-          page: rest.page || 1,
+          page: Number(rest.page) || 1,
           with_genres: movieGenres.map((g: GenreItem) => g.id).join(','),
         });
         ctx.moviesResult = data;
@@ -94,7 +95,7 @@ export default async function handler(
     if (isIncludeTv) {
       try {
         const data = await moviedb.discoverTv({
-          page: rest.page || 1,
+          page: Number(rest.page) || 1,
           with_genres: tvGenres.map((g: GenreItem) => g.id).join(','),
         });
         ctx.tvResults = data;
