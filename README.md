@@ -18,6 +18,13 @@ A project I made to help me combat my indecisiveness when it comes to selecting 
 ![choose media type](./public/images/step1.png)
 ![ai prompt](./public/images/step3.png)
 
+- [step1](https://github.com/KerryMin/what2watch/blob/main/public/images/step1.png)
+- [step3](https://github.com/KerryMin/what2watch/blob/main/public/images/step3.png)
+
+### Up to date trending movies & tv shows
+
+- [trending](./public/images/trending.png)
+=======
 ### Up-to-date trending movies & tv shows
 This list is updated daily, so you should always see the most current trending movies and shows!
 ![trending](./public/images/trending.png)

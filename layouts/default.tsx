@@ -1,6 +1,7 @@
 import { Navbar } from '@/components/navbar'
 import { Link } from '@nextui-org/link'
 import { Head } from './head'
+import { QuestionnaireProvider } from '@/components/Questionnaire/Context'
 
 export default function DefaultLayout({
   children
@@ -10,8 +11,10 @@ export default function DefaultLayout({
   return (
     <div>
       <Head />
-      <Navbar />
-      {children}
+      <QuestionnaireProvider>
+        <Navbar />
+        {children}
+      </QuestionnaireProvider>
       <footer className='w-full flex items-center justify-center py-3 '>
         <span className='text-default-600 mr-2'>Powered by </span>
         <Link

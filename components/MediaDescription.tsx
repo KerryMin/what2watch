@@ -1,42 +1,40 @@
 import { HandThumbUpIcon, HandThumbDownIcon, HeartIcon } from '@heroicons/react/24/solid';
-import { getGenres, getMediaTitle } from "@/helpers/mediaHelpers";
-import { DetailsNextApiResponse } from "@/pages/api/media-details";
+import { getGenres, getMediaInfo, getMediaTitle } from "@/helpers/mediaHelpers";
+import { DetailsNextApiResponse, TrendingNextApiRequest } from "@/pages/api/media-details";
 import { Media } from "@/types";
 import { Skeleton } from "@nextui-org/react";
 import JustWatchWidget from "./JustWatchWidget";
 import { RowContainer } from "./RowContainer";
 import MainCard from "./MainCard";
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useFetchApiLazy } from '@/hooks/useFetchApiLazy';
+import { useRouter } from 'next/router';
+import { MediaNextApiRequest } from '@/pages/api/media';
 
 export function MediaDescription({ media }: { media: Media }) {
-    const mediaType = media?.media_type || 'movie'
+    const router = useRouter()
     const [isLiked, setIsLiked] = useState(false);
     const [isDisliked, setIsDisliked] = useState(false);
     const [isFavorited, setIsFavorited] = useState(false);
     const [data, setData] = useState<DetailsNextApiResponse>();
     const [currentMedia, setCurrentMedia] = useState<Media>(media);
-    const title = getMediaTitle(currentMedia);
-
-    const [getMediaDetails, getMediaDetailQuery] = useFetchApiLazy<DetailsNextApiResponse>('/api/media-details')
+    const getMediaInfoCb = useCallback(() => {
+        return data ? getMediaInfo(data.details) : getMediaInfo(currentMedia)
+    }, [data, currentMedia])
+    const [getMediaDetails, getMediaDetailQuery] = useFetchApiLazy<DetailsNextApiResponse, TrendingNextApiRequest['body']>('/api/media-details')
     const loading = getMediaDetailQuery.loading
-    let runtime
-    if (data?.details && 'runtime' in data?.details) {
-        runtime = data?.details?.runtime
-    }
-    if (data?.details && 'episode_run_time' in data?.details) {
-        runtime = data?.details?.episode_run_time?.[0]
-    }
-    console.log("log: data", {
-        data, media
-    })
+    const { id, title, image, mediaType, runtime, description } = getMediaInfoCb()
+
     function handleCardPress(media: Media) {
+        router.push({
+            query: { id: media?.id, mediaType: media && 'name' in media ? "tv" : 'movie' },
+        }, undefined, { scroll: false })
         setCurrentMedia(media)
     }
     async function getDetails() {
         const details = await getMediaDetails({
-            id: currentMedia?.id,
-            media_type: currentMedia?.media_type
+            id: Number(router.query.id),
+            media_type: router.query.mediaType as 'tv' | 'movie',
         })
         if (details) {
             setData(details)
@@ -44,15 +42,15 @@ export function MediaDescription({ media }: { media: Media }) {
     }
     useEffect(() => {
         getDetails()
-    }, [currentMedia])
+    }, [router.query.id])
 
     return (
         <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
             <div className="md:w-1/3 mb-4 md:mb-0 flex-shrink-0 flex flex-col items-center">
                 <Skeleton isLoaded={!loading} className="flex w-full h-auto justify-center items-center mb-4">
                     <img
-                        src={currentMedia?.poster_path}
-                        alt={`details-${currentMedia?.media_type}`}
+                        src={image}
+                        alt={`details-${title}`}
                         className="max-h-[450px] rounded-lg shadow-lg"
                     />
                 </Skeleton>
@@ -81,9 +79,9 @@ export function MediaDescription({ media }: { media: Media }) {
                 <div className="mt-4 space-y-2 text-center">
                     <div className="text-gray-400">
                         <span className="font-medium">Genres: </span>
-                        {getGenres(currentMedia?.genre_ids)?.map((genre, index) => (
-                            <span key={genre} className="text-gray-300">
-                                {genre}{index !== (currentMedia?.genre_ids?.length || 0) - 1 ? ', ' : ''}
+                        {data?.details?.genres?.map((genre, index) => (
+                            <span key={genre.id} className="text-gray-300">
+                                {genre.name}{index !== (data?.details?.genres?.length || 0) - 1 ? ', ' : ''}
                             </span>
                         ))}
                     </div>
@@ -107,15 +105,15 @@ export function MediaDescription({ media }: { media: Media }) {
 
                 <Skeleton isLoaded={!loading} className="space-y-4">
                     <h4 className="text-lg font-medium text-gray-300 mb-2">Description</h4>
-                    <p className="text-gray-400 leading-relaxed">{currentMedia?.overview}</p>
+                    <p className="text-gray-400 leading-relaxed">{description}</p>
                 </Skeleton>
 
-                {!loading && currentMedia?.id && (
+                {!loading && id && (
                     <div className="mt-6 bg-gray-800 p-4 rounded-lg shadow-md">
                         <h4 className="text-lg font-medium text-gray-300 mb-4">Available On</h4>
                         <JustWatchWidget
                             title={title}
-                            id={currentMedia?.id?.toString()}
+                            id={id?.toString()}
                             objectType={mediaType}
                         />
                     </div>

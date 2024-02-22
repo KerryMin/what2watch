@@ -6,6 +6,7 @@ export type State = {
   genre: ListItem[];
   aiPrompt: string;
   openAiKey: string;
+  search?: string;
 };
 
 export type Action =
@@ -18,7 +19,8 @@ export type Action =
   | { type: 'REMOVE_GENRE'; payload: { id: string } }
   | { type: 'CHANGE_STEP'; payload: number }
   | { type: 'CHANGE_AI_PROMPT'; payload: string }
-  | { type: 'CHANGE_OPEN_AI_KEY'; payload: string };
+  | { type: 'CHANGE_OPEN_AI_KEY'; payload: string }
+  | { type: 'CHANGE_SEARCH'; payload: string };
 
 export const initialState: State = {
   step: 0,
@@ -26,10 +28,16 @@ export const initialState: State = {
   genre: [],
   aiPrompt: '',
   openAiKey: '',
+  search: '',
 };
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
+    case 'CHANGE_SEARCH':
+      return {
+        ...state,
+        search: action.payload,
+      };
     case 'CHANGE_OPEN_AI_KEY':
       return {
         ...state,
