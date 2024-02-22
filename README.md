@@ -1,6 +1,6 @@
 # What 2 Watch
 
-A project i made to help me combat my indecisiveness when it comes to selecting movies.
+A project I made to help me combat my indecisiveness when it comes to selecting movies.
 
 ## Technologies Used
 
@@ -15,6 +15,8 @@ A project i made to help me combat my indecisiveness when it comes to selecting 
 ## Features
 
 ### Filter wizard
+![choose media type](./public/images/step1.png)
+![ai prompt](./public/images/step3.png)
 
 - [step1](https://github.com/KerryMin/what2watch/blob/main/public/images/step1.png)
 - [step3](https://github.com/KerryMin/what2watch/blob/main/public/images/step3.png)
@@ -22,11 +24,16 @@ A project i made to help me combat my indecisiveness when it comes to selecting 
 ### Up to date trending movies & tv shows
 
 - [trending](./public/images/trending.png)
+=======
+### Up-to-date trending movies & tv shows
+This list is updated daily, so you should always see the most current trending movies and shows!
+![trending](./public/images/trending.png)
 
 ### AI generated movie suggestions
-
-- [ai](./public/images/ai.png)
+Categories aint enough to capture what you want to watch? Use our good old friend AI to help you with that! It also generates a unique title based on your ask!
+![ai](./public/images/ai.png)
 
 ### Meta data on media and where to watch!
+A description, genres, runtime, similar results and where to watch? What more could you ask for?
+![where2watch.png](./public/images/where2watch.png)
 
-- [where2watch](./public/images/where2watch.png)
