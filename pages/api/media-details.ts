@@ -100,6 +100,7 @@ async function getMediaSuggestions(
     });
     // @ts-ignore TODO: look into this
     const uniqueResults = (suggestionsResponse.results = suggestionsResponse?.results?.filter?.(
+      // @ts-ignore TODO: look into this
       (r: { id: number | undefined }) => r.id !== mediaDetails.id
     ) as MovieResponse[] | ShowResponse[]);
     return { ...suggestionsResponse, results: uniqueResults };

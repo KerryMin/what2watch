@@ -2,8 +2,8 @@ import { useCallback } from 'react'
 import Wizard from '../Wizard'
 import { useQuestionnaireContext } from './Context'
 import { AiPrompt, SelectGenre, SelectMediaType } from './steps'
-import { fetchCall } from '@/helpers/nextHelpers'
-const steps = [<SelectMediaType />, <SelectGenre />, <AiPrompt />]
+
+const steps = [<SelectMediaType key={"SelectMediaType"} />, <SelectGenre key={"SelectGenre"} />, <AiPrompt key={"AiPrompt"} />]
 
 function QuestionnaireContent() {
   const context = useQuestionnaireContext()

@@ -1,15 +1,12 @@
 import React from 'react'
-import {
-  QuestionnaireProvider,
-} from '@/components/Questionnaire/Context'
-
-import dynamic from 'next/dynamic'
 import { QuestionModal } from '@/components/QuestionModal'
 import { SearchModal } from '@/components/SearchModal'
-
-const Home = dynamic(() => import('./Home'), { ssr: false })
+import Home from '@/components/Home'
+import useIsClient from '@/hooks/useIsClient';
 
 export default function Main() {
+  const isClient = useIsClient();
+  if (!isClient) return null
   return (
     <>
       <Home />

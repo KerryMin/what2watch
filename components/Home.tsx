@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react'
 import { MovieResult, TvResult } from 'moviedb-promise'
 import { createEmptyArray } from '@/helpers/arrayHelpers'
 import { useFetchApiLazy } from '@/hooks/useFetchApiLazy'
-import { MediaNextApiRequest, MediaResponse } from './api/media'
+import { MediaNextApiRequest, MediaResponse } from '../pages/api/media'
 import { ListItem } from '@/components/CardList'
 import { Media } from '@/types'
 import { MediaDescription } from '@/components/MediaDescription'
@@ -29,8 +29,7 @@ import { GenreItem } from '@/config/mediaData'
 const PAGINATED_COUNT = 20
 export default function Home() {
   const router = useRouter()
-  const urlParams = new URLSearchParams(window.location.search);
-  const page = urlParams.get('mediaSearchPage');
+  const page = (router.query.mediaSearchPage as string) || null
 
   const context = useQuestionnaireContext()
   const paginatedCount = context.state.mediaType.length === 2 ? 2 * PAGINATED_COUNT : PAGINATED_COUNT
